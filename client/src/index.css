@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+
+* {
+  font-family: "Outfit", sans-serif;
+  scroll-behavior: smooth;
+}
+
+@theme base {
+  --color-primary: #5044e5;
+}
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes badge-pop {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Animation Utilities */
+.animate-fade-in-up { opacity: 0; animation: fadeInUp 0.5s ease-out forwards; }
+.animate-fade-in { opacity: 0; animation: fadeIn 0.4s ease-out forwards; }
+.animate-card-entrance { opacity: 0; animation: cardEntrance 0.45s ease-out forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-scale-in { opacity: 0; animation: scaleIn 0.3s ease-out forwards; }
+.animate-badge-pop { animation: badge-pop 0.4s ease-out forwards; }
+
+/* Stagger Delays */
+.stagger-1  { animation-delay: 0.05s; }
+.stagger-2  { animation-delay: 0.10s; }
+.stagger-3  { animation-delay: 0.15s; }
+.stagger-4  { animation-delay: 0.20s; }
+.stagger-5  { animation-delay: 0.25s; }
+.stagger-6  { animation-delay: 0.30s; }
+.stagger-7  { animation-delay: 0.35s; }
+.stagger-8  { animation-delay: 0.40s; }
+.stagger-9  { animation-delay: 0.45s; }
+.stagger-10 { animation-delay: 0.50s; }
+.stagger-11 { animation-delay: 0.55s; }
+.stagger-12 { animation-delay: 0.60s; }
+
+/* Card Hover Glow */
+.card-hover-glow {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card-hover-glow:hover {
+  box-shadow: 0 8px 30px -8px rgba(16, 185, 129, 0.18), 0 0 0 1px rgba(16, 185, 129, 0.08);
+  transform: translateY(-4px);
+}
+
+/* Image Zoom Container */
+.img-zoom-container { overflow: hidden; }
+.img-zoom-container img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.img-zoom-container:hover img {
+  transform: scale(1.08);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* Print Media Stylesheet */
+@media print {
+  nav, footer, header, .print\:hidden {
+    display: none !important;
+  }
+  body, main {
+    background: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  /* Remove margins and headers/footers added by browser page settings */
+  @page {
+    margin: 1.6cm;
+  }
+}
+
+/* ── Dark Mode Global Theme Overrides ── */
+html.dark, html.dark body, html.dark main {
+  background-color: #0b0f19 !important; /* Deep navy/slate bg */
+  color: #f1f5f9 !important;
+}
+
+html.dark nav, html.dark footer {
+  background-color: #111827 / 0.8 !important; /* Semi-trans dark menu */
+  border-color: #1f2937 !important;
+}
+
+html.dark nav {
+  background-color: rgba(17, 24, 39, 0.8) !important;
+}
+
+html.dark .bg-white, html.dark .bg-slate-50 {
+  background-color: #111827 !important; /* Card and page bg */
+  color: #f1f5f9 !important;
+}
+
+html.dark .border-slate-100, 
+html.dark .border-slate-200,
+html.dark .border-slate-200\/60 {
+  border-color: #1f2937 !important;
+}
+
+html.dark .text-slate-900,
+html.dark .text-slate-800,
+html.dark .text-slate-700,
+html.dark .text-slate-600 {
+  color: #e5e7eb !important;
+}
+
+html.dark .text-slate-400 {
+  color: #9ca3af !important;
+}
+
+html.dark input, 
+html.dark select, 
+html.dark textarea {
+  background-color: #1f2937 !important;
+  color: #f9fafb !important;
+  border-color: #374151 !important;
+}
+
+html.dark input:focus, 
+html.dark select:focus, 
+html.dark textarea:focus {
+  border-color: #10b981 !important;
+}
+
+html.dark table th {
+  background-color: #1f2937 !important;
+  color: #9ca3af !important;
+}
+
+html.dark table tbody tr:hover {
+  background-color: #1f2937 / 0.3 !important;
+}
+
+html.dark .bg-slate-50 {
+  background-color: #1f2937 !important;
+}
+
+html.dark .shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Spinner animation */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
