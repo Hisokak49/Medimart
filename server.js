@@ -31,6 +31,15 @@ app.use(clerkMiddleware());
 // API Routes
 app.get('/', (req, res) => res.send('MediMart API Server is Live!'));
 
+// Lightweight health endpoint for deployment/load-balancer checks
+app.get('/api/health', (req, res) => {
+    res.status(200).json({
+        status: 'ok',
+        service: 'medimart-api',
+        timestamp: new Date().toISOString()
+    });
+});
+
 // Inngest Webhook & Functions Route
 app.use('/api/inngest', serve({ client: inngest, functions }));
 
