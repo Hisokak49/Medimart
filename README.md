@@ -15,7 +15,7 @@ MediMart is a full-stack pharmacy/e-commerce application built as a practical we
 - Email/event automation with Inngest and Nodemailer
 - MongoDB persistence with Mongoose
 - Clerk-based authentication integration
-- Lightweight API health check for deployment monitoring
+- Lightweight API health and database readiness checks for deployment monitoring
 - Vercel deployment configuration
 
 ## 🧱 Tech Stack
@@ -79,15 +79,18 @@ npm run server
 
 For the frontend, use the scripts defined in `client/package.json`.
 
-## 🩺 API Health Check
+## 🩺 API Health & Readiness
 
-The backend exposes a lightweight health endpoint:
+The backend exposes two unauthenticated monitoring endpoints:
 
 ```text
 GET /api/health
+GET /api/ready
 ```
 
-A healthy API responds with HTTP `200` and a JSON payload containing the service status and UTC timestamp. This endpoint can be used by deployment platforms or uptime monitors without requiring authentication.
+`/api/health` is a lightweight **liveness** check. It returns HTTP `200` when the API process can handle requests and includes the service status and UTC timestamp.
+
+`/api/ready` is a **readiness** check. It returns HTTP `200` when the MongoDB connection is established and HTTP `503` while the database is disconnected. Deployment platforms and uptime monitors can use this endpoint when database availability is required before routing traffic to the service.
 
 ## 🔐 Security Notes
 
