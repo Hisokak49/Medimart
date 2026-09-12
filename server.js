@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
+import mongoose from 'mongoose';
 import connectDB from './configs/db.js';
 import { clerkMiddleware } from '@clerk/express';
 import { serve } from "inngest/express";
@@ -31,11 +32,23 @@ app.use(clerkMiddleware());
 // API Routes
 app.get('/', (req, res) => res.send('MediMart API Server is Live!'));
 
-// Lightweight health endpoint for deployment/load-balancer checks
+// Lightweight liveness endpoint for deployment/load-balancer checks
 app.get('/api/health', (req, res) => {
     res.status(200).json({
         status: 'ok',
         service: 'medimart-api',
+        timestamp: new Date().toISOString()
+    });
+});
+
+// Readiness endpoint reports whether MongoDB is currently connected
+app.get('/api/ready', (req, res) => {
+    const isDatabaseReady = mongoose.connection.readyState === 1;
+
+    res.status(isDatabaseReady ? 200 : 503).json({
+        status: isDatabaseReady ? 'ready' : 'not_ready',
+        service: 'medimart-api',
+        database: isDatabaseReady ? 'connected' : 'disconnected',
         timestamp: new Date().toISOString()
     });
 });
