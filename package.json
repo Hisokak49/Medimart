@@ -12,7 +12,16 @@
     "check:client": "cd client && npm run lint",
     "check:all": "npm run check && npm run check:client"
   },
-  "keywords": [],
+  "keywords": [
+    "pharmacy",
+    "ecommerce",
+    "medicine",
+    "mern",
+    "express",
+    "mongodb",
+    "mongoose",
+    "clerk"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
