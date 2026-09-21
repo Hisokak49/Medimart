@@ -4,6 +4,9 @@
   "description": "MediMart Express server matching the QuickShow coding style",
   "main": "server.js",
   "type": "module",
+  "engines": {
+    "node": ">=18.18.0"
+  },
   "scripts": {
     "server": "nodemon server.js",
     "start": "node server.js",
