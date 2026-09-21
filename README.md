@@ -32,6 +32,15 @@ MediMart is a full-stack pharmacy/e-commerce application built as a practical we
 
 **Deployment:** Vercel
 
+## 📋 Prerequisites
+
+- Node.js **18.18.0 or newer**
+- npm
+- MongoDB access for the backend
+- The required authentication, database, email, and API credentials configured through environment variables
+
+The supported Node.js version is declared in the root `package.json` so local development and deployment platforms can detect an incompatible runtime early.
+
 ## 📁 Project Structure
 
 ```text
@@ -71,7 +80,17 @@ cd ..
 
 Create the environment files required by the server and client. Keep secrets such as database credentials, Clerk keys, email credentials, and API keys out of Git.
 
-### 4. Start the development server
+### 4. Validate the project
+
+Run the lightweight checks before starting development:
+
+```bash
+npm run check:all
+```
+
+`check:all` syntax-checks the Express entry point and runs the client's ESLint checks.
+
+### 5. Start the development server
 
 ```bash
 npm run server
